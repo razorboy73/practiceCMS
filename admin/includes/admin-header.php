@@ -31,6 +31,7 @@ if(!isset($_SESSION['user_role'])){
     <meta name="author" content="">
 
     <title>SB Admin - Bootstrap Admin Template</title>
+  
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +48,12 @@ if(!isset($_SESSION['user_role'])){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Text Editor -->
+
+
    
 
 </head>
