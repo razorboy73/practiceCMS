@@ -24,8 +24,6 @@
 
                         <h1 class="page-header">
                            Administrative User Interface
-                           Administrative Island place
-                           Another Title
                             <small> <?php echo $_SESSION['username']; ?></small>
                         </h1>
                         
