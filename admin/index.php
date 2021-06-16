@@ -23,7 +23,8 @@
                     <div class="col-lg-12">
 
                         <h1 class="page-header">
-                           Administrative Interface
+                           Administrative User Interface
+                           Administrative Island place
                             <small> <?php echo $_SESSION['username']; ?></small>
                         </h1>
                         
