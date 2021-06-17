@@ -10,7 +10,7 @@
 
             switch($bulk_options){
 
-               case "publish":
+               case "published":
                     foreach($_POST['checkBoxArray'] as $post_id){
                         $query = "UPDATE posts SET ";
                         $query .= "post_status = '{$bulk_options}' ";
@@ -62,7 +62,7 @@
 
             <select class="form-control" name="bulk_options" id="">
             <option value="">Select Options</option>
-            <option value="publish">Publish</option>
+            <option value="published">Publish</option>
             <option value="draft">Draft</option>
             <option value="delete">Delete</option>
 
