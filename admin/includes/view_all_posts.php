@@ -2,13 +2,54 @@
     if(isset($_POST['checkBoxArray'])){
 
 
-        foreach($_POST['checkBoxArray'] as  $checkBoxValue){
+        //foreach($_POST['checkBoxArray'] as  $checkBoxValue){
                
+            echo $bulk_options = $_POST['bulk_options'];
+            //print_r($_POST['checkBoxArray']);
+        //}
 
-                $bulk_options = $_POST['checkBoxArray'];
-        }
+            switch($bulk_options){
+
+               case "publish":
+                    foreach($_POST['checkBoxArray'] as $post_id){
+                        $query = "UPDATE posts SET ";
+                        $query .= "post_status = '{$bulk_options}' ";
+                        $query .= "WHERE post_id = '{$post_id}'";
+                        $update_post_status = mysqli_query($connection, $query);
+
+                    confirmQuery($update_post_status);
+                    }
+                    echo "<p class='well bg-success'>Posts Updated To Publish</p>";
+                
+                break;
+                
+               case "draft":
+                    foreach($_POST['checkBoxArray'] as $post_id){
+                        $query = "UPDATE posts SET ";
+                        $query .= "post_status = '{$bulk_options}' ";
+                        $query .= "WHERE post_id = '{$post_id}'";
+                        $update_post_status  = mysqli_query($connection, $query);
+
+                    confirmQuery($update_post_status);
+                    }
+                    echo "<p class='well bg-success'>Posts Updated To Draft</p>";
+                
+             break;
+               case "delete":
+                foreach($_POST['checkBoxArray'] as $post_id){
+                    $query = "DELETE from posts WHERE ";
+                    $query .= "post_id = {$post_id}";
+                    $update_post_status = mysqli_query($connection, $query);
+
+                confirmQuery($update_post_status);
+                }
+                echo "<p class='well bg-success'>Post(s) Deleted</p>";
+            
+                break;
+            }
+     }
         
-    }
+    
 ?>
 
 
@@ -21,9 +62,9 @@
 
             <select class="form-control" name="bulk_options" id="">
             <option value="">Select Options</option>
-            <option value="">Publish</option>
-            <option value="">Draft</option>
-            <option value="">Delete</option>
+            <option value="publish">Publish</option>
+            <option value="draft">Draft</option>
+            <option value="delete">Delete</option>
 
             </select>
          </div>
