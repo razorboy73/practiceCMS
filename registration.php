@@ -1,6 +1,5 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
-
  <?php
     if(isset($_POST['submit'])){
 
@@ -18,20 +17,20 @@
             if(!$select_randsalt_query){
                 die ("Query Failed" . mysqli_error($connection));
             }
-       
 
-            while($row = mysqli_fetch_array($select_randsalt_query)){
+        $row = mysqli_fetch_array($select_randsalt_query);
 
-                    echo $salt = $row['randSalt'];
-            }
-    
-
+        echo $salt = $row['randSalt'];
 
         $query = "INSERT into users(user_role,username,user_email,user_password) ";
         $query .= "VALUE('subscriber','{$username}', '{$user_email}','{$user_password}') ";
 
 
-        $create_user_query = mysqli_query($connection, $query);
+        $register_user_query = mysqli_query($connection, $query);
+
+        if (!$register_user_query){
+            die("Query failed ". mysqli_error($connection) . " " .mysqli_errno($connection));
+        }
 
         //confirmQuery($create_user_query);
 
@@ -39,7 +38,7 @@
  
     
  ?>
-
+ 
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
