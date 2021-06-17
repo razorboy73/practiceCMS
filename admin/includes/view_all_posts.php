@@ -27,7 +27,7 @@
                     foreach($_POST['checkBoxArray'] as $post_id){
                         $query = "UPDATE posts SET ";
                         $query .= "post_status = '{$bulk_options}' ";
-                        $query .= "WHERE post_id = '{$post_id}'";
+                        $query .= "WHERE post_id = {$post_id}";
                         $update_post_status  = mysqli_query($connection, $query);
 
                     confirmQuery($update_post_status);
