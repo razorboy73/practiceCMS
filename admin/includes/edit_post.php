@@ -67,7 +67,7 @@
         $update_post = mysqli_query($connection, $query);
 
         confirmQuery($update_post);
-        echo "<div class='well'>Post Updated: <a href='posts.php'>View Posts</a></div>";
+        echo "<p class='well bg-success'>Post Updated: <a href='posts.php'>View Other Posts</a></a>";
  
         
         }
