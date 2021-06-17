@@ -12,7 +12,18 @@
         $username = mysqli_real_escape_string($connection,$username);
         $user_email= mysqli_real_escape_string($connection,$user_email);
         $user_password = mysqli_real_escape_string($connection,$user_password );
+            $query = "SELECT randSalt FROM users";
+            $select_randsalt_query = mysqli_query($connection, $query);
+
+            if(!$select_randsalt_query){
+                die ("Query Failed" . mysqli_error($connection));
+            }
        
+
+            while($row = mysqli_fetch_array($select_randsalt_query)){
+
+                    echo $salt = $row['randSalt'];
+            }
     
 
 
