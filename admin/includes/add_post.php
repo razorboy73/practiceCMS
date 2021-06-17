@@ -28,7 +28,9 @@
 
         confirmQuery($create_post_query);
 
-        echo "<div class='well'>Post Added: <a href='posts.php'>View Posts</a></div>";
+
+        $the_post_id = mysqli_insert_id($connection);
+        echo "<div class='well'>Post Added: <a href='../post.php?p_id={$the_post_id}'> View Live Post</a> or <a href='posts.php'>Edit More Posts</a></div>";
  
 
     }
