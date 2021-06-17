@@ -28,6 +28,9 @@
 
         confirmQuery($create_post_query);
 
+        echo "<div class='well'>Post Added: <a href='posts.php'>View Posts</a></div>";
+ 
+
     }
 
 ?>
