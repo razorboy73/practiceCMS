@@ -19,17 +19,18 @@
          </div>
             <thead>
                 <tr>
-                    <th>ID</th>
-                                    <th>Author</th>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Status</th>
-                                    <th>Image</th>
-                                    <th>Tags</th>
-                                    <th>Comments</th>
-                                    <th>Date</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                <th> <input id="selectAllBoxes" type="checkbox"> </th>
+                <th>ID</th>
+                <th>Author</th>
+                 <th>Title</th>
+                 <th>Category</th>
+                  <th>Status</th>
+                 <th>Image</th>
+                  <th>Tags</th>
+                   <th>Comments</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                     <th>Delete</th>
                                     
                                 </tr>
                             </thead>
@@ -52,6 +53,11 @@
 
 
                                     echo "<tr>";
+                                    ?>
+
+                                    <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
+
+                                    <?php
                                     echo "<td>{$post_id}</td>";
                                     echo "<td>{$post_author}</td>";
                                     echo "<td>{$post_title}</td>";
