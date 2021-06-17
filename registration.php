@@ -1,11 +1,19 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
 
+ <?php
+    if(isset($_POST['submit']))
+
+    echo "hi there";
+
+ ?>
+
 
     <!-- Navigation -->
-    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+ 
     <?php  include "includes/navigation.php"; ?>
-    
+    </nav>
  
     <!-- Page Content -->
     <div class="container">
