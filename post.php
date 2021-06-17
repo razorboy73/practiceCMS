@@ -67,31 +67,46 @@
                 <?php
 
                 if(isset($_POST['create_comment'])){
-                    $the_post_id = $_GET["p_id"];
 
+                    $the_post_id = $_GET["p_id"];
                     $comment_author = $_POST['comment_author'];
                     $comment_email =  $_POST['comment_email'];
                     $comment_content = $_POST['comment_content'];
-                
 
-                $query = "INSERT into comments(comment_post_id,comment_author,comment_email,comment_content,comment_status,comment_date) ";
-                $query .= "VALUE({$the_post_id},'{$comment_author}','{$comment_email}','{$comment_content}','unapproved',now()) ";
+                    if(!empty($comment_author)&&!empty($comment_email)&&!empty($comment_content)){
+
+                        $query = "INSERT into comments(comment_post_id,comment_author,comment_email,comment_content,comment_status,comment_date) ";
+                        $query .= "VALUE({$the_post_id},'{$comment_author}','{$comment_email}','{$comment_content}','unapproved',now()) ";
 
 
-                $create_comment_query = mysqli_query($connection, $query);
+                        $create_comment_query = mysqli_query($connection, $query);
 
-                    if(!$create_comment_query){
-                        die('Query Failed: ' . mysqli_error($connection));
+                            if(!$create_comment_query){
+                                die('Query Failed: ' . mysqli_error($connection));
+                            }
+
+                        $query = "UPDATE posts SET post_comment_count = post_comment_count +1 WHERE post_id = $the_post_id";
+                        $update_comment_query = mysqli_query($connection, $query);
+
+                        if(!$update_comment_query){
+                            die('Query Failed: ' . mysqli_error($connection));
+                        }
+
+                    }else{
+                            //echo "<div class='well'><b>These fields can't be blank</b></div>";
+                            echo "<script>alert('Comment Fields Cannot Be Blank')</script>";
+                        
+                        }
+                      
+
+
+                        
                     }
 
-                $query = "UPDATE posts SET post_comment_count = post_comment_count +1 WHERE post_id = $the_post_id";
-                $update_comment_query = mysqli_query($connection, $query);
 
-                if(!$update_comment_query){
-                    die('Query Failed: ' . mysqli_error($connection));
-                }
 
-                }
+
+                    
 
                     ?>
 
