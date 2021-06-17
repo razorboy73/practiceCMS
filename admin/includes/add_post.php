@@ -95,7 +95,7 @@
 </div>
 
 <div class="form-group">
-    <label for="">Post Content</label>
+    <label for="summernote">Post Content</label>
     <textarea type="text" class="form-control" name="post_content" id="summernote" cols="30" rows="10"></textarea>
 </div>
 <div class="form-group">
