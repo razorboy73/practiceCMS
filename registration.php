@@ -2,10 +2,31 @@
  <?php  include "includes/header.php"; ?>
 
  <?php
-    if(isset($_POST['submit']))
+    if(isset($_POST['submit'])){
 
-    echo "hi there";
+       
+        $username = $_POST['username'];
+        $user_email = $_POST['email'];
+        $user_password =$_POST['password'];
 
+        $username = mysqli_real_escape_string($connection,$username);
+        $user_email= mysqli_real_escape_string($connection,$user_email);
+        $user_password = mysqli_real_escape_string($connection,$user_password );
+       
+    
+
+
+        $query = "INSERT into users(user_role,username,user_email,user_password) ";
+        $query .= "VALUE('subscriber','{$username}', '{$user_email}','{$user_password}') ";
+
+
+        $create_user_query = mysqli_query($connection, $query);
+
+        //confirmQuery($create_user_query);
+
+    }
+ 
+    
  ?>
 
 
