@@ -5,6 +5,8 @@
 
 if(isset($_POST['login'])){
   
+
+
 $username = $_POST['username'];
 $password = $_POST['password'];
 
@@ -26,9 +28,16 @@ while($row = mysqli_fetch_array($select_user_query)){
     $db_firstname = $row['user_firstname'];
     $db_lastname = $row['user_lastname'];
     $db_user_role = $row['user_role'];
+    $db_randSalt = $row['randSalt'];
 }
-if ($username === $db_username && $password === $db_password){
 
+
+$password = crypt($password, $db_password);
+
+
+
+if ($username === $db_username && $password === $db_password){
+   
     $_SESSION['username'] = $db_username;
     $_SESSION['firstname'] = $db_user_firstname;
     $_SESSION['lastname'] = $db_user_lastname;
@@ -40,7 +49,7 @@ if ($username === $db_username && $password === $db_password){
     header("Location: ../index.php");
 }
     
-}
+} 
 
 
 ?>
