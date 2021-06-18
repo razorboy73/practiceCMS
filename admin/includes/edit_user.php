@@ -88,7 +88,7 @@ if(isset($_POST['edit_user'])){
 
 
 
-<option value="subscriber"><?php echo $user_role?></option>
+<option value=<?php echo $user_role?>><?php echo $user_role?></option>
 
 
 <?php 
