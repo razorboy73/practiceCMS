@@ -13,8 +13,8 @@
             $username = mysqli_real_escape_string($connection,$username);
             $user_email= mysqli_real_escape_string($connection,$user_email);
             $user_password = mysqli_real_escape_string($connection,$user_password );
-                $query = "SELECT randSalt FROM users";
-                $select_randsalt_query = mysqli_query($connection, $query);
+            $query = "SELECT randSalt FROM users";
+            $select_randsalt_query = mysqli_query($connection, $query);
 
                 if(!$select_randsalt_query){
                     die ("Query Failed" . mysqli_error($connection));
@@ -23,6 +23,7 @@
             $row = mysqli_fetch_array($select_randsalt_query);
 
             echo $salt = $row['randSalt'];
+            $user_password = crypt($user_password, $salt);
 
             $query = "INSERT into users(user_role,username,user_email,user_password) ";
             $query .= "VALUE('subscriber','{$username}', '{$user_email}','{$user_password}') ";
@@ -68,6 +69,7 @@
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
                 <h1>Register</h1>
+            
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                         <h6 class = "text center"><?php echo $message ?></h6>
                         <div class="form-group">
