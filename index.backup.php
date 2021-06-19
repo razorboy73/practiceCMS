@@ -22,40 +22,21 @@
 
                 <?php
 
+                $query = "SELECT * FROM posts";
+                $select_all_posts_query = mysqli_query($connection, $query);
 
-                $select_post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
-                $find_count = mysqli_query($connection, $select_post_query_count);
-                $count = mysqli_num_rows($find_count);
+                while($row = mysqli_fetch_assoc($select_all_posts_query)){
+                    $post_id= $row['post_id'];
+                    $post_title = $row['post_title'];
+                    $post_author = $row['post_author'];
+                    $post_date = $row['post_date'];
+                    $post_image = $row['post_image'];
+                    $post_content = substr($row['post_content'],0,100);
+                    $post_status = $row['post_status'];
 
-                echo $count = ceil($count/5);
+                    if($post_status == 'published'){
 
-                if(isset($_GET['page'])){
-                    $page= $_GET['page'];
-
-                }else{
-                    $page = "";
-                }
-
-                if($page == "" || $page ==1){
-                    $page_1 = 0;
-                }else {
-                    $page_1 = ($page *5)-5;
-                }
-                    $query = "SELECT * FROM posts WHERE post_status = 'published' LIMIT $page_1, 5";
-                    $select_all_posts_query = mysqli_query($connection, $query);
-
-                    while($row = mysqli_fetch_assoc($select_all_posts_query)){
-                        $post_id= $row['post_id'];
-                        $post_title = $row['post_title'];
-                        $post_author = $row['post_author'];
-                        $post_date = $row['post_date'];
-                        $post_image = $row['post_image'];
-                        $post_content = substr($row['post_content'],0,100);
-                        $post_status = $row['post_status'];
-
-                        if($post_status == 'published'){
-
-                    }
+                   
                     ?>
                   
 
@@ -75,7 +56,7 @@
 
                             <hr>
 
-                <?php }  ?>
+                <?php }  }?>
            
          
                 
@@ -93,13 +74,7 @@
         <!-- /.row -->
 
         <hr>
-        <ul class="pager">
-        <?php
-        for($x=1; $x<=$count; $x++){
-         echo "<li><a href='index.php?page={$x}'>{$x}</a></li>";
-        }
-          ?>              
-        </ul>
+
         <!-- Footer -->
         <?php include "includes/footer.php"?>
 
