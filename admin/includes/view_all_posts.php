@@ -4,7 +4,7 @@
 
         //foreach($_POST['checkBoxArray'] as  $checkBoxValue){
                
-            echo $bulk_options = $_POST['bulk_options'];
+         $bulk_options = $_POST['bulk_options'];
             //print_r($_POST['checkBoxArray']);
         //}
 
@@ -35,6 +35,44 @@
                     echo "<p class='well bg-success'>Posts Updated To Draft</p>";
                 
              break;
+
+                case "clone":
+                foreach($_POST['checkBoxArray'] as $post_id){    
+                    $query = "SELECT * FROM posts WHERE post_id = {$post_id} ";
+                    $select_post_query = mysqli_query($connection, $query);
+                    while ($row = mysqli_fetch_array($select_post_query)){
+
+                        $post_title = $row['post_title'];
+                        $post_author = $row['post_author'];
+                        $post_category_id = $row['post_category_id'];
+                        $post_status = $row['post_status'];
+        
+                        $post_image = $row['post_image'];
+                        
+                
+                        $post_tags = $row['post_tags'];
+                        $post_content = $row['post_content'];
+                        $post_date = date('d-m-y');
+                        $post_comment_count = 0;
+                
+                       
+                
+                        $query = "INSERT into posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_comment_count,post_status) ";
+                        $query .= "VALUE({$post_category_id},'Copy of {$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}',0,'draft') ";
+                
+                
+                        $create_copy_query = mysqli_query($connection, $query);
+                
+                        confirmQuery($create_copy_query);
+                
+                    }
+                }
+                       
+                        echo "<div class='well'>Post Copied</div>";
+                
+                
+
+             break;
                case "delete":
                 foreach($_POST['checkBoxArray'] as $post_id){
                     $query = "DELETE from posts WHERE ";
@@ -64,6 +102,7 @@
             <option value="">Select Options</option>
             <option value="published">Publish</option>
             <option value="draft">Draft</option>
+            <option value="clone">Clone</option>
             <option value="delete">Delete</option>
 
             </select>
@@ -96,7 +135,7 @@
                         
                             <tbody>
                             <?php
-                              $query = "SELECT * FROM posts ";
+                              $query = "SELECT * FROM posts ORDER BY post_id DESC";
                               $select_posts = mysqli_query($connection, $query);
                           
                               while($row = mysqli_fetch_assoc($select_posts)){
