@@ -19,7 +19,7 @@
 
             <?php 
                 if(isset($_GET['author']))
-                    $post_id = $_GET["p_id"];
+                    //$post_id = $_GET["p_id"];
                     $post_author = $_GET["author"];
             ?>
 
@@ -35,8 +35,12 @@
                 $query = "SELECT * FROM posts WHERE post_author = '$post_author' AND  post_status = 'published'";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
+                if(!$select_all_posts_query){
+                    die('Query Failed: ' . mysqli_error($connection));
+                }
+
                 while($row = mysqli_fetch_assoc($select_all_posts_query)){
-   
+                    $post_id = $row['post_id'];
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
                     $post_date = $row['post_date'];

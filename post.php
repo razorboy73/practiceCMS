@@ -40,6 +40,10 @@
                 $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
                 $select_all_posts_query = mysqli_query($connection, $query);
 
+                if(!$select_all_posts_query){
+                    die('Query Failed: ' . mysqli_error($connection));
+                }
+
                 while($row = mysqli_fetch_assoc($select_all_posts_query)){
    
                     $post_title = $row['post_title'];
@@ -55,7 +59,7 @@
                     <?php echo $post_title ?>
                 </h2>
                 <p class="lead">
-                by <a href="author_posts.php?author=<?php echo $post_author?>&p_id=<?php echo $post_id?>"><?php echo $post_author ?></a>
+                by <a href="author_posts.php?author=<?php echo $post_author?>&p_id=<?php echo $the_post_id?>"><?php echo $post_author ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date ?></p>
                 <hr>
