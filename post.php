@@ -25,7 +25,7 @@
                     $send_query = mysqli_query($connection, $view_query);
 
                     if(!$send_query){
-                        die("query failed");
+                        die("query failed" . mysqli_error($connection));
                     }
                     
             ?>
