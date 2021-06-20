@@ -16,16 +16,8 @@
         move_uploaded_file($user_image_temp, "../images/$user_image");
 
 
-    $query = "SELECT randSalt from users";
-    $select_randsalt_query = mysqli_query($connection, $query);
-    if(!$select_randsalt_query){
-        die("Query Failed" . mysqli_error($connection));
-    }
-
-    $row = mysqli_fetch_array($select_randsalt_query);
-    $salt = $row['randSalt'];
-    $hashed_password= crypt($user_password, $salt);
- 
+   
+        $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
 
 
         $query = "INSERT into users(user_firstname,user_lastname,user_role,username,user_email,user_password) ";
