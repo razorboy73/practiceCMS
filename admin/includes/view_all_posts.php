@@ -178,11 +178,14 @@
 
                                     $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
                                     $send_comment_query = mysqli_query($connection, $query);
+
+                                    $row = mysqli_fetch_array($send_comment_query);
+                                    $comment_id = $row['comment_id'];
                                     $post_comment_count = mysqli_num_rows($send_comment_query);
 
 
 
-                                    echo "<td>{$post_comment_count}</td>";
+                                    echo "<td><a href ='comment.php?id=$comment_id'>{$post_comment_count}</a></td>";
                                     echo "<td>{$post_date}</td>";
                                     echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
                                     echo "<td><a onClick = \"javascript:return confirm('Are you sure about deleting this?'); \"  href='posts.php?delete={$post_id}'>Delete</a></td>";
