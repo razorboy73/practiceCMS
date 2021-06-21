@@ -175,6 +175,13 @@
                                     echo "<td>{$post_status}</td>";
                                     echo "<td ><img width='100' src='../images/{$post_image}' alt='images'</td>";
                                     echo "<td>{$post_tags}</td>";
+
+                                    $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
+                                    $send_comment_query = mysqli_query($connection, $query);
+                                    $post_comment_count = mysqli_num_rows($send_comment_query);
+
+
+
                                     echo "<td>{$post_comment_count}</td>";
                                     echo "<td>{$post_date}</td>";
                                     echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
