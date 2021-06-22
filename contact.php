@@ -3,20 +3,19 @@
  <?php
     if(isset($_POST['contact'])){
 
-       
-        $to= "joshadamkerbel@gmail.com";
-        $subject = $_POST['subject'];
-        $body =$_POST['body'];
 
-        
-        // the message
-        $msg = $body;
+        $to= "joshadamkerbel@gmail.com";
+        $subject = wordwrap($_POST['subject'], 70);
+        $body = $_POST['body'];
+        $header = $_POST['email'];
+
+
 
         // use wordwrap() if lines are longer than 70 characters
-        $msg = wordwrap($msg,70);
+     
 
         // send email
-        mail($to,$subject,$msg);
+        mail($to,$subject,$body, $header);
 
 
     }
