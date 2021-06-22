@@ -1,12 +1,12 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
  <?php
-    if(isset($_POST['contact'])){
+    if(isset($_POST['submit'])){
 
 
         $to= "joshadamkerbel@gmail.com";
         $subject = "this is a test";
-        $body = "more ttest";
+        $body = "more test";
         $header = 'josh@frshminds.com';
 
         
@@ -52,7 +52,7 @@
                             <textarea class="form-control" name="body" id="body"></textarea>
                         </div>
                 
-                        <input type="submit" name="contact" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Contact Us">
+                        <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Contact Us">
                     </form>
                  
                 </div>
