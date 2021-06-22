@@ -13,7 +13,10 @@
 
 
         // send email
-        mail($to,$subject,$body, $header);
+        @mail($to,$subject,$body, $header);
+
+       
+        
 
 
     }
