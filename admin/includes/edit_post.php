@@ -83,7 +83,7 @@
     <input value="<?php echo $post_title?>" type="text" class="form-control" name="post_title">
 </div>
 <div class="form-group">
-
+<label for="post_category">Category</label>
 <select name="post_category" id="">
 
 <?php
@@ -100,13 +100,6 @@
         echo "<option value='$cat_id'> $cat_title</option>";
 
         }
-  
-    
-   
-
-
-
-
 
 ?>
 
@@ -115,7 +108,32 @@
 </div>
 <div class="form-group">
     <label for="post_author">Post Author</label>
-    <input value="<?php echo $post_author?>" type="text" class="form-control" name="post_author">
+    <select name = "post_author" id="">
+    <option value="<?php echo $post_author?>"><?php echo $post_author?></option>
+    <?php
+        $query = "SELECT username FROM users ";
+        $select_user= mysqli_query($connection, $query);
+        confirmQuery($select_user);
+
+        while($row = mysqli_fetch_assoc($select_user)){
+        
+        $username = $row['username'];
+
+        echo "<option value='$username'> $username</option>";
+
+        }
+
+
+
+?>
+    </select>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
 <div class="form-group">

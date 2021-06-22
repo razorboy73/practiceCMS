@@ -77,7 +77,7 @@
 <label for="title">Author</label>
     <select name="post_author" id="">
 <?php
-        $query = "SELECT user_id, username FROM users ";
+        $query = "SELECT username FROM users ";
         $select_user= mysqli_query($connection, $query);
         confirmQuery($select_user);
 
@@ -85,7 +85,7 @@
         $user_id = $row['user_id'];
         $username = $row['username'];
 
-        echo "<option value='$user_id'> $username</option>";
+        echo "<option value='$username'> $username</option>";
 
         }
 
