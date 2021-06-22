@@ -64,23 +64,36 @@
                 echo "<option value='$cat_id'> $cat_title</option>";
 
                 }
-        
-            
-        
-
-
-
-
 
         ?>
 
         </select>
 
-
 </div>
 <div class="form-group">
-    <label for="post_author">Post Author</label>
-    <input type="text" class="form-control" name="post_author">
+    <!--<label for="post_author">Post Author</label>
+    <input type="text" class="form-control" name="post_author"> -->
+
+<label for="title">Author</label>
+    <select name="post_author" id="">
+<?php
+        $query = "SELECT user_id, username FROM users ";
+        $select_user= mysqli_query($connection, $query);
+        confirmQuery($select_user);
+
+        while($row = mysqli_fetch_assoc($select_user)){
+        $user_id = $row['user_id'];
+        $username = $row['username'];
+
+        echo "<option value='$user_id'> $username</option>";
+
+        }
+
+
+
+?>
+
+</select>
 </div>
 
 <div class="form-group">
