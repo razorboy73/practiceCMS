@@ -5,15 +5,15 @@
 
 
         $to= "joshadamkerbel@gmail.com";
-        $subject = "this is a test";
-        $body = "more test";
-        $header = 'josh@frshminds.com';
+        $subject = $_POST['subject'];
+        $body = $_POST['body'];
+        $header = $_POST['email'];
 
         
 
 
         // send email
-        @mail($to,$subject,$body, $header);
+        mail($to,$subject,$body, $header);
 
        
         
