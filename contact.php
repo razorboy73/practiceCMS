@@ -5,14 +5,12 @@
 
 
         $to= "joshadamkerbel@gmail.com";
-        $subject = wordwrap($_POST['subject'], 70);
-        $body = $_POST['body'];
-        $header = $_POST['email'];
+        $subject = "this is a test";
+        $body = "more ttest";
+        $header = 'josh@frshminds.com';
 
+        
 
-
-        // use wordwrap() if lines are longer than 70 characters
-     
 
         // send email
         mail($to,$subject,$body, $header);
