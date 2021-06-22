@@ -7,7 +7,7 @@
         $to= "joshadamkerbel@gmail.com";
         $subject = $_POST['subject'];
         $body = $_POST['body'];
-        $header = $_POST['email'];
+        $header = "FROM: ".$_POST['email'];
 
         
 
