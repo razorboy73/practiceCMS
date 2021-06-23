@@ -1,12 +1,17 @@
 
 <!-- Login-->
 <div class="well">
-                    <h4>Login</h4>
+            <?php if(isset($_SESSION['user_role'])): ?>
+                <h4> Logged in as <?php echo $_SESSION['username']; ?></h4>
+                <a href="includes/logout.php" class="btn btn-primary btn-power-off"> Logout</a>
+                
+            <?php else: ?>
+                <h4>Login</h4>
 
                     <form action="includes/login.php" method="post">
                     <div class="form-group">
                         <input name="username" type="text" class="form-control" placeholder="Enter User Name">
-                       
+                    
                     </div>
                     <div class="input-group">
                         <input name="password" type="password" class="form-control" placeholder="Enter Password">
@@ -14,9 +19,13 @@
                         <button class="btn btn-primary" name="login" type="submit">Submit</button>
                         
                         </span>
-                       
-                    </div>
-                    </form><!--search form -->
+   
+</div>
+</form><!--search form -->
+
+            <?php endif; ?>
+
+                    
 
                     <!-- /.input-group -->
                 </div>
