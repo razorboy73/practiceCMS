@@ -86,6 +86,7 @@
 <label for="post_category">Category</label>
 <select name="post_category" id="">
 
+
 <?php
 
         $query = "SELECT * FROM categories ";
