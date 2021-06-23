@@ -21,28 +21,38 @@
                 if(isset($_GET['p_id'])){
                     $the_post_id = $_GET["p_id"];
 
-                   $view_query = "UPDATE posts SET post_views_count = post_views_count +1 WHERE post_id = $the_post_id";
+                    $view_query = "UPDATE posts SET post_views_count = post_views_count +1 WHERE post_id = $the_post_id";
                     $send_query = mysqli_query($connection, $view_query);
 
                     if(!$send_query){
                     die("query failed" . mysqli_error($connection));
                     }
+
+            if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'){
+                $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
+
+            }else{
+                $query = "SELECT * FROM posts WHERE post_id = $the_post_id and post_status = 'published' ";
+            }
+
                     
             ?>
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
-
+                
 
                 <?php
 
-                $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
+            
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                 if(!$select_all_posts_query){
                     die('Query Failed: ' . mysqli_error($connection));
                 }
+                if(mysqli_num_rows($select_all_posts_query) <1){
+                    
+                    echo "<h2>No Posts in Category</h2>";
+                
+                 }else{
+
 
                 while($row = mysqli_fetch_assoc($select_all_posts_query)){
    
@@ -53,6 +63,10 @@
                     $post_content = $row['post_content'];
 
                     ?>
+                    <h1 class="page-header">
+                    Posts
+                   
+                </h1>
 
                     <!-- First Blog Post -->
                 <h2>
@@ -73,13 +87,7 @@
                 <?php }
 
 
-                }else{
-            
-            header("Location: index.php");
-            
-            
-            
-            } ?>
+                 ?>
 
 
                 <!-- Blog Comments -->
@@ -201,7 +209,13 @@
 
                     <hr>
 
-                    <?php } ?>
+                    <?php } }}else{
+            
+                            header("Location: index.php");
+            
+            
+            
+                             }?>
 
 
                 <!-- Comment -->
