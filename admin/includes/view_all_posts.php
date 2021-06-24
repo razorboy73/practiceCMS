@@ -157,6 +157,8 @@ include("delete_modal.php");
                                     $post_comments = $row['post_comment_count'];
                                     $post_date = $row['post_date'];
                                     $post_views_count = $row['post_views_count'];
+                                    $category_title = $row['cat_title'];
+                                    $category_id = $row['cat_id'];
 
 
                                     echo "<tr>";
@@ -169,15 +171,12 @@ include("delete_modal.php");
                                     echo "<td>{$post_author}</td>";
                                     echo "<td><a href='../post.php?p_id={$post_id}'>{$post_title}</a></td>";
 
-                                    $query = "SELECT * FROM categories WHERE cat_id = $post_category_id ";
-                                    $select_categories_id = mysqli_query($connection, $query);
+                                
 
-                                    while($row = mysqli_fetch_assoc($select_categories_id)){
-                                        $cat_id = $row['cat_id'];
-                                        $cat_title = $row['cat_title'];
+                                    echo "<td>{$category_title}</td>";
+                                    
 
-                                    echo "<td>{$cat_title}</td>";
-                                    }
+
                                     echo "<td>{$post_status}</td>";
                                     echo "<td ><img width='100' src='../images/{$post_image}' alt='images'</td>";
                                     echo "<td>{$post_tags}</td>";
