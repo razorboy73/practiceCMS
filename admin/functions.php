@@ -123,9 +123,22 @@ function recordCount($table){
     $query = "SELECT * FROM "  . $table;
     $select_all_posts = mysqli_query($connection, $query);
     $result = mysqli_num_rows($select_all_posts);
-    confirmQuery($result);
+    
+    //confirmQuery($result); This causes an error with zero returns
+    
     
     return $result;
+    
 }
 
+
+function checkStatus($table, $column, $status){
+    global $connection;
+    $query = "SELECT * FROM $table WHERE $column  = '$status' ";
+    $select_items = mysqli_query($connection, $query);
+    $select_items_counts = mysqli_num_rows($select_items);
+    //confirmQuery($select_items_counts); This causes an error with zero returns
+    return $select_items_counts;
+    
+}
 ?>

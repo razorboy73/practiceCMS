@@ -140,26 +140,20 @@
 </div>
                 <!-- /.row -->
 
-                <!--gathering all posts, draft posts, unapproved comments, subscribers-->
+                <!--gathering counts ll posts, draft posts, unapproved comments, subscribers-->
                 <?php
                 $query = "SELECT * FROM posts";
                 $select_all_posts = mysqli_query($connection, $query);
                 $post_all_posts_counts = mysqli_num_rows($select_all_posts);
-                ?>
-                <?php
-                $query = "SELECT * FROM posts WHERE post_status = 'draft'";
-                $select_all_draft_posts = mysqli_query($connection, $query);
-                $post_draft_counts = mysqli_num_rows($select_all_draft_posts);
-                ?>
-                <?php
-                $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
-                $select_all_unapprove_comments = mysqli_query($connection, $query);
-                $unapproved_comment_counts = mysqli_num_rows($select_all_unapprove_comments);
-                ?>
-                <?php
-                 $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
-                 $select_all_subscribers= mysqli_query($connection, $query);
-                 $subscriber_counts = mysqli_num_rows($select_all_subscribers);
+               
+               
+                $post_draft_counts = checkStatus('posts', 'post_status', 'draft');
+             
+                
+                $unapproved_comment_counts = checkStatus('comments', 'comment_status', 'unapproved');
+                
+             
+                 $subscriber_counts = checkStatus('users', 'user_role', 'subscriber');
 
 
                 ?>
