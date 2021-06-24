@@ -1,22 +1,12 @@
 <?php include "includes/admin-header.php"; ?>
 
     <div id="wrapper">
-    
-
-
-
-
-
-
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
            
         <?php include "includes/admin-navigation.php"; ?>
             
         </nav>
-
-
-
 
         <div id="page-wrapper">
 
@@ -49,10 +39,9 @@
                     <div class="col-xs-9 text-right">
 
                         <?php
-                        $query = "SELECT * FROM posts WHERE post_status = 'published'";
-                        $select_all_posts = mysqli_query($connection, $query);
-                        $post_counts = mysqli_num_rows($select_all_posts);
-                        echo "<div class='huge'>{$post_counts}</div>"
+                       
+                        $post_counts = recordCount("posts WHERE post_status = 'published'");
+                        echo "<div class='huge'>{$post_counts}</div>";
 
                         ?>
                   
@@ -78,9 +67,8 @@
                     </div>
                         <div class="col-xs-9 text-right">
                         <?php
-                        $query = "SELECT * FROM comments WHERE comment_status = 'approved'";
-                        $select_all_comments = mysqli_query($connection, $query);
-                        $comment_counts = mysqli_num_rows($select_all_comments);
+                        
+                        $comment_counts = recordCount("comments WHERE comment_status = 'approved'");
                         echo "<div class='huge'>{$comment_counts}</div>"
                         ?>
                       <div>Comments</div>
@@ -105,9 +93,8 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <?php
-                        $query = "SELECT * FROM users WHERE user_role = 'admin'";
-                        $select_all_users = mysqli_query($connection, $query);
-                        $user_counts = mysqli_num_rows($select_all_users);
+                       
+                        $user_counts = recordCount("users WHERE user_role = 'admin'");
                         echo "<div class='huge'>{$user_counts}</div>"
                         ?>
                     <div> Users</div>
@@ -132,9 +119,8 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <?php
-                        $query = "SELECT * FROM categories";
-                        $select_all_categories = mysqli_query($connection, $query);
-                        $category_counts = mysqli_num_rows($select_all_categories);
+                       
+                        $category_counts = recordCount("categories");
                         echo "<div class='huge'>{$category_counts}</div>"
                         ?>
                         
