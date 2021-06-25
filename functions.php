@@ -102,10 +102,10 @@ function login_user($username, $password){
 
         if($db_user_role == 'admin'){
 
-        header("Location: /cms/admin");
+        header("Location: /admin");
 
         } else {
-        header("Location: /cms/index.php");
+        header("Location: /index.php");
         }
     }   
 }
