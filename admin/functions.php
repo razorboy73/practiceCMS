@@ -157,7 +157,6 @@ function is_admin($username = ''){
         return false;
     }
 
-
-
+    
 }
 ?>

@@ -1,5 +1,10 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
+ <?php include "functions.php"; ?>
+ 
+
+ 
+
  <?php
     if(isset($_POST['submit'])){
 
@@ -7,6 +12,14 @@
         $username = $_POST['username'];
         $user_email = $_POST['email'];
         $user_password =$_POST['password'];
+
+
+        if (username_exists($username)){
+
+            $message = "User Exists";
+            //header("Location: registration.php"); exit;
+
+        }
 
         if(!empty($username) && !empty($user_email) && !empty($user_password)){
 
@@ -30,7 +43,7 @@
 
             }
                
-            $message = "Your Registration has been submitted";
+            //$message = "Your Registration has been submitted";
            
             
 
