@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/index">CMS Front</a>
+                <a class="navbar-brand" href="/cms/index">CMS Front</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -47,7 +47,7 @@
                         <a href="admin">Admin</a>
                     </li>
                     <li class = '<?php echo $registration_class;?>'>
-                        <a href="registration.php">Registration</a>
+                        <a href="/cms/registration.php">Registration</a>
                     </li> 
                     <li>
                        
