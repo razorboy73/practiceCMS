@@ -1,3 +1,5 @@
+<?php  include "./admin/functions.php"; ?>
+<?php  include "./functions.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -90,27 +90,30 @@ function login_user($username, $password){
         $db_lastname = $row['user_lastname'];
         $db_user_role = $row['user_role'];
         $db_randSalt = $row['randSalt'];
+
+        if (password_verify($password,$db_password)){
+    
+            $_SESSION['username'] = $db_username;
+            $_SESSION['firstname'] = $db_user_firstname;
+            $_SESSION['lastname'] = $db_user_lastname;
+            $_SESSION['user_role'] = $db_user_role;
+    
+            if($db_user_role == 'admin'){
+    
+            header("Location: /cms/admin");
+    
+            } else {
+            //header("Location: /cms/index.php");
+            return false;
+            }
+        }   
     }
 
 
-    if (password_verify($password,$db_password)){
     
-        $_SESSION['username'] = $db_username;
-        $_SESSION['firstname'] = $db_user_firstname;
-        $_SESSION['lastname'] = $db_user_lastname;
-        $_SESSION['user_role'] = $db_user_role;
-
-        if($db_user_role == 'admin'){
-
-        header("Location: /admin");
-
-        } else {
-        header("Location: /index.php");
-        }
-    }   
 }
 
-function is_admin($username = ''){
+/*function is_admin($username = ''){
 
     global $connection;
     $query = "SELECT user_role FROM users WHERE username = '$username'";
@@ -125,7 +128,7 @@ function is_admin($username = ''){
     }
 
     
-}
+}*/
 
 
 ?>
