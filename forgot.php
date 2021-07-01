@@ -57,6 +57,7 @@ require './vendor/phpmailer/phpmailer/src/SMTP.php';
                     $mail->Password   = Config::SMTP_PASSWORD;                             //SMTP password
                     $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
                     $mail->Port       = Config::SMTP_PORT;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                    $mail->CharSet = 'UTF-8';
                     //$mail->isHTML(true);
                     //Recipients
                     $mail->setFrom('joshadamkerbel@gmail.com', 'Dr Josh');
