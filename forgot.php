@@ -3,7 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer; // needs to be on top !!!
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-require './classes/Config.php'; 
+//require './vendor/phpmailer/phpmailer/src/PHPMailerAutoload.php';
+//require './classes/Config.php'; 
+require 'vendor/autoload.php';
 require './vendor/phpmailer/phpmailer/src/Exception.php';
 require './vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require './vendor/phpmailer/phpmailer/src/SMTP.php';
@@ -70,8 +72,9 @@ require './vendor/phpmailer/phpmailer/src/SMTP.php';
                 
                     //Content
                     $mail->isHTML(true);                                  //Set email format to HTML
+                    $mail->CharSet = 'UTF-8';
                     $mail->Subject = 'Here is the subject';
-                    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+                    $mail->Body    = '<h1>This is the HTML message body</h1> <b>in bold!</b><br>Cómo estás, hijo de puta';
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                 
                     $mail->send();
