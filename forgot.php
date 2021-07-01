@@ -74,12 +74,15 @@ require './vendor/phpmailer/phpmailer/src/SMTP.php';
                     //Content
                     $mail->isHTML(true);                                  //Set email format to HTML
                     $mail->CharSet = 'UTF-8';
-                    $mail->Subject = 'Here is the subject';
-                    $mail->Body    = '<h1>This is the HTML message body</h1> <b>in bold!</b><br>Cómo estás, hijo de puta';
+                    $mail->Subject = 'Password Reset Email';
+                    $mail->Body    = '<p>Click the link below to reset your email</b>
+                                    <br>
+                                    <a href="http://localhost/cms/reset.php?email='.$email.'&token='.$token.'  ">http://localhost/cms/reset.php?email= '.$email.'&token='.$token.'  </a>';
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
                 
                     $mail->send();
-                    echo 'Message has been sent';
+                    //echo 'Message has been sent';
+                    $emailSent = true;
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
@@ -108,11 +111,12 @@ require './vendor/phpmailer/phpmailer/src/SMTP.php';
                     <div class="panel-body">
                         <div class="text-center">
 
-
+                        <?php if(!isset($emailSent)): ?>
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
                                 <h2 class="text-center">Forgot Password?</h2>
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">
+
 
 
 
@@ -130,7 +134,11 @@ require './vendor/phpmailer/phpmailer/src/SMTP.php';
                                         </div>
 
                                         <input type="hidden" class="hide" name="token" id="token" value="">
+
+                                        <?php else: ?>
                                         <p>Please check your email</p>
+
+                                        <?php endIf; ?>
                                     </form>
 
                                 </div><!-- Body-->
