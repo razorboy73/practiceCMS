@@ -1,6 +1,23 @@
 <?php include "includes/header.php"?>
 <?php include "includes/db.php" ?>
 <?php session_start(); ?>
+<?php
+  require __DIR__ . '/vendor/autoload.php';
+
+  $options = array(
+    'cluster' => 'us2',
+    'useTLS' => true
+  );
+  $pusher = new Pusher\Pusher(
+    '2d2ad570015d44548763',
+    'da6ebeb98ca328e3b32f',
+    '1228635',
+    $options
+  );
+
+  $data['message'] = 'hello world';
+  $pusher->trigger('my-channel', 'my-event', $data['message']);
+?>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
