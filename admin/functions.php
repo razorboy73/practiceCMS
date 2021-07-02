@@ -1,5 +1,16 @@
 <?php
 
+function currentUser(){
+    if(isset($_SESSION['username'])){
+        return $_SESSION['username'];
+    }
+}
+
+
+
+
+
+
 function confirmQuery($result){
 
         global $connection;
