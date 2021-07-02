@@ -8,6 +8,12 @@
     <?php include "includes/navigation.php"?>
     </nav>
 
+    <?php
+        if(isset($_POST['liked'])){
+            echo "<h1> It Worked";
+        }
+    ?>
+
     <!-- Page Content -->
     <div class="container">
 
@@ -250,8 +256,20 @@
         <script>
 
         $(document).ready(function(){
+            var post_id = <?php echo $the_post_id; ?>;
+            var user_id = 65;
             $(".like").click(function(){
-                console.log("it works")
+                $.ajax({
+                    url: "/cms/post.php?p_id=<?php echo $the_post_id; ?>",
+                    type: "post",
+                    data: {
+                        'liked': 1,
+                        'post_id': post_id,
+                        'user_id': user_id
+
+
+                    }
+                });
             });
         });
         
