@@ -7,7 +7,14 @@ function currentUser(){
 }
 
 
-
+function imagePlaceholder($image){
+    if(!$image){
+        return 'smashed%20computer.jpg';
+    }else{
+        return $image;
+   
+    }
+}
 
 
 
