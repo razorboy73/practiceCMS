@@ -22,6 +22,8 @@
                 echo $post['post_id'];
             }
             //Update Post with Likes
+            mysqli_query($connection, "UPDATE posts SET likes=$likes+1 WHERE post_id = $post_id");
+
             //Put data inside likes
         }
     ?>
