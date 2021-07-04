@@ -3,6 +3,12 @@
 <?php session_start(); ?>
 <?php
 echo loggedInUserID();
+
+if(userLikedThisPost(136)){
+    echo "User Like It";
+}else{
+    echo "user did not like it";
+}
 ?>
 
 
