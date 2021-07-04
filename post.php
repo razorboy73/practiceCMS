@@ -9,9 +9,13 @@
     </nav>
 
     <?php
+        //Like code
         if(isset($_POST['liked'])){
-            echo "<h1> It Worked</h1>";
+            echo "<h1> Liked Worked</h1>";
             $post_id = $_POST['post_id'];
+            echo $post_id;
+            $user_id = $_POST['user_id'];
+            echo $user_id;
             //Select Post
             $query= "SELECT * FROM posts WHERE post_id=$post_id";
             $postResult = mysqli_query($connection, $query);
@@ -25,6 +29,36 @@
             mysqli_query($connection, "UPDATE posts SET likes=$likes+1 WHERE post_id = $post_id");
 
             //Put data inside likes
+            mysqli_query($connection, "INSERT INTO likes(post_id, user_id) VALUES($post_id, $user_id)");
+            exit();
+
+        }
+
+        if(isset($_POST['unliked'])){
+            echo "<h1> Unliked Worked</h1>";
+        $post_id = $_POST['post_id'];
+            echo $post_id;
+            $user_id = $_POST['user_id'];
+            echo $user_id;
+            //Select Post
+            $query= "SELECT * FROM posts WHERE post_id=$post_id";
+            $postResult = mysqli_query($connection, $query);
+            $post = mysqli_fetch_array($postResult);
+            $likes = $post['likes'];
+
+            //Delete Likes
+            mysqli_query($connection, "DELETE FROM likes WHERE post_id = $post_id  AND user_id = $user_id");
+
+            //if(mysqli_num_rows($postResult) >= 1){
+            //    echo $post['post_id'];
+           // }
+            //Update Post with Unlike
+            mysqli_query($connection, "UPDATE posts SET likes=$likes-1 WHERE post_id = $post_id");
+
+           
+           
+            exit();
+
         }
     ?>
 
@@ -105,6 +139,9 @@
                 <hr>
                 <div class="row">
                     <p class="pull-right"><a class="like" href="#"> <span class="glyphicon glyphicon-thumbs-up"></span> Like</a></p>
+                </div>
+                <div class="row">
+                    <p class="pull-right"><a class="unlike" href="#"> <span class="glyphicon glyphicon-thumbs-down"></span> Unlike</a></p>
                 </div>
                 <div class="row">
                     <p class = "pull-right">Likes:10</p>
@@ -272,12 +309,27 @@
         $(document).ready(function(){
             var post_id = <?php echo $the_post_id; ?>;
             var user_id = 65;
+            //Like code
             $(".like").click(function(){
                 $.ajax({
                     url: "/cms/post.php?p_id=<?php echo $the_post_id; ?>",
                     type: "post",
                     data: {
                         'liked': 1,
+                        'post_id': post_id,
+                        'user_id': user_id
+
+
+                    }
+                });
+            });
+            //unlike
+            $(".unlike").click(function(){
+                $.ajax({
+                    url: "/cms/post.php?p_id=<?php echo $the_post_id; ?>",
+                    type: "post",
+                    data: {
+                        'unliked': 1,
                         'post_id': post_id,
                         'user_id': user_id
 

@@ -1,5 +1,11 @@
 <?php
 
+function query($query){
+    global $connection;
+    return mysqli_query($connection, $query);
+}
+
+
 function currentUser(){
     if(isset($_SESSION['username'])){
         return $_SESSION['username'];
@@ -26,6 +32,18 @@ function confirmQuery($result){
             die('Query Failed: ' . mysqli_error($connection));
     }
    
+}
+
+function loggedInUserID(){
+
+    if(isLoggedIn()){
+        $result =  query("SELECT * FROM users WHERE username='".$_SESSION['username']."'");
+        $user = mysqli_fetch_array($result);
+        if(mysqli_num_rows($result) >=1){
+            return $user['user_id'];
+        }
+    }
+    return false;
 }
 
 
@@ -208,4 +226,6 @@ function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
             redirect($redirectLocation);
         }
 }
+
+
 ?>
