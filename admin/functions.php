@@ -57,6 +57,14 @@ function userLikedThisPost($post_id = ""){
 
 
 
+function getPostLikes($post_id){
+    $result = query("SELECT * FROM likes WHERE post_id=$post_id");
+    confirmQuery($result);
+    echo mysqli_num_rows($result);
+}
+
+
+
 function insert_categories(){
 
         global $connection;
