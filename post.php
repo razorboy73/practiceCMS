@@ -131,7 +131,14 @@
                         <?php 
                         if (isLoggedIn()){?>
                             <div class="row">
-                                <p class="pull-right"><a class="<?php echo userLikedThisPost($the_post_id) ? 'unlike': 'like';?>" href=""><span class="glyphicon glyphicon-thumbs-up"></span><?php echo userLikedThisPost($the_post_id)? ' Unlike' :' Like';?></a></p>
+                                <p class="pull-right"><a 
+                                class="<?php echo userLikedThisPost($the_post_id) ? 'unlike': 'like';?>" 
+                                href=""><span class="glyphicon glyphicon-thumbs-up"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title = "<?php echo userLikedThisPost($the_post_id)? ' I liked this before' :' Want to like this?';?>"
+
+                                ></span><?php echo userLikedThisPost($the_post_id)? ' Unlike' :' Like';?></a></p>
                             </div>
                         <?php }  else  { ?>
                             <div class="row">
@@ -296,6 +303,7 @@
         <script>
 
         $(document).ready(function(){
+            $("[data-toggle='tooltip']").tooltip();
             var post_id = <?php echo $the_post_id; ?>;
             var user_id = <?php echo loggedInUserID() ;?>;
             //Like code
