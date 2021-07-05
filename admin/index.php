@@ -1,3 +1,4 @@
+
 <?php include "includes/admin-header.php"; ?>
 
     <div id="wrapper">
@@ -44,7 +45,8 @@
 
                         <?php
                        
-                        $post_counts = recordCount("posts WHERE post_status = 'published'");
+                        $post_counts = recordCount("posts WHERE post_status = 'published' AND post_author = '$_SESSION[username]' ");
+                
                         echo "<div class='huge'>{$post_counts}</div>";
 
                         ?>
@@ -72,7 +74,7 @@
                         <div class="col-xs-9 text-right">
                         <?php
                         
-                        $comment_counts = recordCount("comments WHERE comment_status = 'approved'");
+                        $comment_counts = recordCount("comments WHERE comment_status = 'approved'AND comment_author = '$_SESSION[username]'");
                         echo "<div class='huge'>{$comment_counts}</div>"
                         ?>
                       <div>Comments</div>
@@ -98,7 +100,7 @@
                     <div class="col-xs-9 text-right">
                         <?php
                        
-                        $user_counts = recordCount("users WHERE user_role = 'admin'");
+                        $user_counts = recordCount("users WHERE user_role = 'admin' AND username = '$_SESSION[username]'");
                         echo "<div class='huge'>{$user_counts}</div>"
                         ?>
                     <div> Users</div>
@@ -146,18 +148,18 @@
 
                 <!--gathering counts ll posts, draft posts, unapproved comments, subscribers-->
                 <?php
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts WHERE post_author = '$_SESSION[username]'";
                 $select_all_posts = mysqli_query($connection, $query);
                 $post_all_posts_counts = mysqli_num_rows($select_all_posts);
                
                
-                $post_draft_counts = checkStatus('posts', 'post_status', 'draft');
+                $post_draft_counts = checkStatus('posts', 'post_status', 'draft', 'post_author', $_SESSION['username']);
              
                 
-                $unapproved_comment_counts = checkStatus('comments', 'comment_status', 'unapproved');
+                $unapproved_comment_counts = checkStatus('comments', 'comment_status', 'unapproved','comment_author', $_SESSION['username']);
                 
              
-                 $subscriber_counts = checkStatus('users', 'user_role', 'subscriber');
+                 $subscriber_counts = checkStatus('users', 'user_role', 'subscriber','username', $_SESSION['username']);
 
 
                 ?>

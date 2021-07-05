@@ -154,7 +154,7 @@
                         <div class="clearfix"></div>
 
                     
-
+                               
 
                     <!-- Blog Comments -->
 
@@ -226,7 +226,7 @@
                     <!-- Posted Comments -->
                     <?php
 
-                            $query = "SELECT * FROM comments WHERE comment_post_id = $the_post_id and comment_status ='unapproved' ORDER BY comment_id DESC";
+                            $query = "SELECT * FROM comments WHERE comment_post_id = $the_post_id and comment_status ='approved' ORDER BY comment_id DESC";
                             $select_all_comments_query = mysqli_query($connection, $query);
 
                             while($row = mysqli_fetch_assoc($select_all_comments_query)){

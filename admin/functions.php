@@ -84,9 +84,12 @@ function confirmQuery($result){
 function loggedInUserID(){
 
     if(isLoggedIn()){
-        $result =  query("SELECT * FROM users WHERE username=".$_SESSION['username']."");
+        //$result =  query("SELECT * FROM users WHERE username='razorboy'");
+    
+        $result =  query("SELECT * FROM users WHERE username='$_SESSION[username]'");
         confirmQuery($result);
         $user = mysqli_fetch_array($result);
+        
         return mysqli_num_rows($result) >=1 ? $user['user_id']: false;
         //if(mysqli_num_rows($result) >=1){
        //     return $user['user_id'];
@@ -224,6 +227,7 @@ function recordCount($table){
     global $connection;
 
     $query = "SELECT * FROM "  . $table;
+    //echo $query;
     $select_all_posts = mysqli_query($connection, $query);
     $result = mysqli_num_rows($select_all_posts);
     
@@ -235,9 +239,15 @@ function recordCount($table){
 }
 
 
-function checkStatus($table, $column, $status){
+function checkStatus($table, $column, $status, $author=null, $username=null){
     global $connection;
-    $query = "SELECT * FROM $table WHERE $column  = '$status' ";
+    if(!$author || !$username){
+
+    $query = "SELECT * FROM $table WHERE $column  = '$status'";
+    }else{
+
+    $query = "SELECT * FROM $table WHERE $column  = '$status' AND $author ='$username'";
+    }
     $select_items = mysqli_query($connection, $query);
     $select_items_counts = mysqli_num_rows($select_items);
     //confirmQuery($select_items_counts); This causes an error with zero returns
