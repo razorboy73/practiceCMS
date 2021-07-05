@@ -1,10 +1,57 @@
 <?php
 
-function query($query){
-    global $connection;
-    return mysqli_query($connection, $query);
+
+
+//===DATABASE HELPERS =====//
+
+function redirect($location){
+    header("Location:" . $location);
+    exit;
 }
 
+
+
+function query($query){
+    global $connection;
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+    return $result;
+
+}
+
+function fetchRecords($result){
+    return mysqli_fetch_array($result);
+
+}
+
+
+//===End Database HELPERS ===//
+
+//==General Helpers ==//
+
+function get_user_name(){
+    return (isset($_SESSION['username']) ? $_SESSION['username']: null); 
+      
+}
+
+// ==== AUTHENTICATION HELPERS =====//
+function is_admin($username = ''){
+
+   
+    if(isLoggedIn()){
+        $result = query("SELECT user_role FROM users WHERE user_id= ".$_SESSION['user_id']."");
+        $row = fetchRecords($result);
+        if($row['user_role'] == 'admin'){
+        return true;
+        }else{
+        return false;
+        }
+    }
+    return false;
+}
+
+
+// ==== END AUTHENTICATION HELPERS =====//
 
 function currentUser(){
     if(isset($_SESSION['username'])){
@@ -37,7 +84,7 @@ function confirmQuery($result){
 function loggedInUserID(){
 
     if(isLoggedIn()){
-        $result =  query("SELECT * FROM users WHERE username='".$_SESSION['username']."'");
+        $result =  query("SELECT * FROM users WHERE username=".$_SESSION['username']."");
         confirmQuery($result);
         $user = mysqli_fetch_array($result);
         return mysqli_num_rows($result) >=1 ? $user['user_id']: false;
@@ -199,28 +246,9 @@ function checkStatus($table, $column, $status){
 }
 
 
-function is_admin($username = ''){
-
-    global $connection;
-    $query = "SELECT user_role FROM users WHERE username = '$username'";
-    $result = mysqli_query($connection, $query);
-    confirmQuery($result);
-    $row = mysqli_fetch_array($result);
-
-    if($row['user_role'] == 'admin'){
-        return true;
-    }else{
-        return false;
-    }
-
-    
-}
 
 
-function redirect($location){
-    header("Location:" . $location);
-    exit;
-}
+
 
 
 function ifItIsMethod($method=null){
@@ -245,4 +273,53 @@ function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
 }
 
 
-?>
+
+function login_user($username, $password){
+    global $connection;
+
+    //$username = $_POST['username'];
+    //$password = $_POST['password'];
+
+    $username = trim($username);
+    $password = trim($password);
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
+
+    $query = "SELECT * FROM users WHERE username = '$username' ";
+    $select_user_query = mysqli_query($connection, $query);
+
+    if(!$select_user_query){
+        die("Connection Error: " . mysqli_error($connection) );
+    }
+
+    while($row = mysqli_fetch_array($select_user_query)){
+        //print_r($row);
+        $db_user_id = $row['user_id'];
+        $db_username = $row['username'];
+        $db_password = $row['user_password'];
+        $db_firstname = $row['user_firstname'];
+        $db_lastname = $row['user_lastname'];
+        $db_user_role = $row['user_role'];
+        $db_randSalt = $row['randSalt'];
+
+        if (password_verify($password,$db_password)){
+            $_SESSION['user_id'] = $db_user_id;
+            $_SESSION['username'] = $db_username;
+            $_SESSION['firstname'] = $db_firstname;
+            $_SESSION['lastname'] = $db_lastname;
+            $_SESSION['user_role'] = $db_user_role;
+    
+            if($db_user_role == 'admin'){
+    
+            header("Location: /cms/admin");
+    
+            } else {
+            //header("Location: /cms/index.php");
+            return false;
+            }
+        }   
+    }
+
+
+    
+    }   

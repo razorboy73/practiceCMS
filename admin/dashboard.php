@@ -17,12 +17,8 @@
                     <div class="col-lg-12">
 
                         <h1 class="page-header">
-                           Administrative User Interface
-                            <small> <?php 
-                           
-                           echo strtoupper(get_user_name());
-                            
-                            ?></small>
+                          Welcome to the ADMIN DASHBOARD
+                            <small> <?php echo $_SESSION['username']; ?></small>
                            
                         </h1>
                         
